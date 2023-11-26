@@ -1,4 +1,4 @@
-﻿namespace TimeManagementTracker.Migrations
+﻿namespace TimeManagementApp.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
