@@ -1,23 +1,29 @@
-﻿namespace TimeManagementApp.Migrations
+namespace TimeManagementApp.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TimeManagementApp.DAL.DatabaseContext>
+    public partial class initial : DbMigration
     {
-        public Configuration()
+        public override void Up()
         {
-            AutomaticMigrationsEnabled = false;
+            CreateTable(
+                "dbo.Times",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Date = c.DateTime(nullable: false),
+                        TaskName = c.String(),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        Notes = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+
         }
 
-        protected override void Seed(TimeManagementApp.DAL.DatabaseContext context)
+        public override void Down()
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            DropTable("dbo.Times");
         }
     }
 }
